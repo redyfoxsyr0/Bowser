@@ -326,29 +326,21 @@ inp.addEventListener('keydown',e=>{
 items.forEach(el=>{el.addEventListener('mousedown',()=>{inp.value=el.textContent.trim();sugg.classList.remove('open');clearBtn.classList.add('visible');});});
 clearBtn.addEventListener('click',()=>{inp.value='';clearBtn.classList.remove('visible');items.forEach(el=>el.style.display='');inp.focus();});
 function doSearch() {
-  const query = inp.value.trim();
+    const query = inp.value.trim();
 
-  if (!query) return;
+    if (!query) return;
 
-  // If user types a website, go there
-  if (query.includes(".") && !query.includes(" ")) {
-    window.location.href = query.startsWith("http")
-      ? query
-      : "https://" + query;
-    return;
-  }
-
-  // Otherwise search Google
-  window.location.href = "https://searx.oloke.xyz/search?q=" + encodeURIComponent(query);
+    window.location.href =
+        "https://searx.oloke.xyz/search?q=" + encodeURIComponent(query);
 }
 
 document.getElementById("searchBtn").addEventListener("click", doSearch);
 
 inp.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    doSearch();
-  }
+    if (e.key === "Enter") {
+        e.preventDefault();
+        doSearch();
+    }
 });
 document.getElementById('featGrid').querySelectorAll('.feat').forEach(el=>{
   el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)/r.width*100+'%');el.style.setProperty('--my',(e.clientY-r.top)/r.height*100+'%');});
